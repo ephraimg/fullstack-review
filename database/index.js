@@ -45,7 +45,8 @@ let save = repos => {
   });
   return Promise.all(promises)
     .then(results => results)
-    .catch(err => console.error(err))
+    .catch(err => fs.appendFile('errorLog.txt', 
+      `Error at db index.js 48: ${err}`), err => console.error(err));
 }
 
 save(sampleData)

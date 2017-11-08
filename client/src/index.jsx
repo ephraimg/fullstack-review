@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
+import GITHUB_TOKEN from '../../config.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +16,17 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
-    // TODO
+
+$.ajax({
+  type: "POST",
+  url: '/repos',
+  data: JSON.stringify('hello'),
+  processData: false,
+  success: () => {},
+  contentType: 'application/json'
+});
+    
+    //$.post('localhost:1128/repos', 'hello', () => {});
   }
 
   render () {
