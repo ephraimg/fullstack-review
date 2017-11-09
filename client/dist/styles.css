@@ -17,6 +17,11 @@ input {
   margin-left: 5px;
 }
 
+hr {
+  width: 500px;
+  margin: 20px 0;
+}
+
 .repo-list {
   list-style-type: none;
   padding-left: 0px;
