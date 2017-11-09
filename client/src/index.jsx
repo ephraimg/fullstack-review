@@ -15,13 +15,20 @@ class App extends React.Component {
   }
 
   componentDidMount () {
+    this.getRepos();
+  }
+
+  getRepos () {
     $.ajax({
       type: 'GET',
       url: '/repos',
       success: (results) => {
-        this.setState({
-          repos: results.repos,
-          repoCount: results.count
+        console.log("Got results from server!")
+        this.setState((prevState, props) => {
+          return {
+            repos: results.repos,
+            repoCount: results.count
+          };
         });
       }
     });
@@ -34,7 +41,7 @@ class App extends React.Component {
       url: '/repos',
       data: JSON.stringify(term),
       processData: false,
-      success: () => {},
+      success: () => { this.getRepos(); },
       contentType: 'application/json'
     });
   }

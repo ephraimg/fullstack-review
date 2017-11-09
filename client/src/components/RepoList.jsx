@@ -29,7 +29,7 @@ var textStyle = {
 const RepoList = (props) => (
   <div>
     <h4> Github Repos </h4>
-    There are {props.repoCount} repos stored. The top 25 are:
+    There are {props.repoCount} repos stored.
     <ul style={listStyle}>
     {props.repos.map(repo => (
       <li key={repo.id} style={listItemStyle}>

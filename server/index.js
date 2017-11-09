@@ -9,27 +9,18 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json({strict: false}));
 
 app.post('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
-  console.log('New post from client...\nRequest body is: ', req.body);
   github.getReposByUsername(req.body)
     .then(repos => {
-      console.log(repos);
-      db.save(repos);
+      return db.save(repos);
     })
-    .then(res.send(201));
+    .then(results => res.status(201).send(results));
 });
 
 app.get('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should send back the top 25 repos
   let repoCount = 0;
   db.Repo.countAsync((err, count) => {
     if (err) { console.error(err); }
     repoCount = count;
-    console.log('============> count is: ', count);
     db.Repo.find()
       .sort('-watchers_count')
       .limit(25)
