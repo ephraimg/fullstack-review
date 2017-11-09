@@ -5,6 +5,11 @@ let app = express();
 const bodyParser = require('body-parser');
 const github = require('../helpers/github.js');
 
+// To set environment variables
+var dotenv = require('dotenv')
+dotenv.config();
+dotenv.load();
+
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json({strict: false}));
 
@@ -28,7 +33,7 @@ app.get('/repos', function (req, res) {
   });
 });
 
-let port = 1128;
+let port = process.env.PORT;
 
 app.listen(port, function() {
   console.log(`listening on port ${port}`);

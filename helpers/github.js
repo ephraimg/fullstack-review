@@ -1,5 +1,9 @@
 const requestAsync = require('request-promise');
-const config = require('../config.js'); 
+
+// To set environment variables
+var dotenv = require('dotenv')
+dotenv.config();
+dotenv.load();
 
 let getReposByUsername = (username) => {
   // TODO - Use the request module to request repos for a specific
@@ -7,11 +11,12 @@ let getReposByUsername = (username) => {
 
   // The options object has been provided to help you out, 
   // but you'll have to fill in the URL
-  let options = {
+  let options = { 
     url: `https://api.github.com/users/${username}/repos`,
     headers: {
       'User-Agent': 'request-promise',
-      'Authorization': `token ${config.GITHUB_TOKEN}`
+      // 'Authorization': `token ${config.GITHUB_TOKEN}`
+      'Authorization': `token ${process.env.GITHUB_TOKEN}`
     },
     json: true
   };

@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
 Promise.promisifyAll(require('mongoose'));
-mongoose.connectAsync('mongodb://localhost/fetcher');
+
+// To set environment variables
+var dotenv = require('dotenv')
+dotenv.config();
+dotenv.load();
+
+mongoose.connectAsync(process.env.MONGODB_URI); //'mongodb://localhost/fetcher');
 const db = mongoose.connection;
 
 const sampleData = require('../data.json');
