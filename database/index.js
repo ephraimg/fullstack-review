@@ -26,6 +26,7 @@ let makeRecord = repo => {
   let record = new Repo({
     id: repo.id,
     name: repo.name,
+    login: repo.login, 
     owner_id: repo.owner.id,
     avatar_url: repo.owner.avatar_url,
     html_url: repo.html_url,

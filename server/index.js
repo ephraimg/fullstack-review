@@ -25,10 +25,16 @@ app.post('/repos', function (req, res) {
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
-  db.Repo.find()
-    .sort('-watchers_count')
-    .limit(3)
-    .then(repos => res.send(200, repos));
+  let repoCount = 0;
+  db.Repo.countAsync((err, count) => {
+    if (err) { console.error(err); }
+    repoCount = count;
+    console.log('============> count is: ', count);
+    db.Repo.find()
+      .sort('-watchers_count')
+      .limit(25)
+      .then(repos => res.status(200).send({count: count, repos: repos}));
+  });
 });
 
 let port = 1128;
