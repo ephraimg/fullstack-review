@@ -38,6 +38,7 @@ let makeRecord = repo => {
 let save = repos => {
   // put single repo in an array if not already
   let records = [].concat(repos);
+  console.log('----------------> records: ', records);
   records = records.map(repo => makeRecord(repo));
   let promises = [];
   records.forEach(record => {
@@ -49,8 +50,8 @@ let save = repos => {
       `Error at db index.js 48: ${err}`), err => console.error(err));
 }
 
-save(sampleData)
-  .then(results => console.log(`Saved ${results.length} mongoose records!`));
+// save(sampleData)
+//   .then(results => console.log(`Saved ${results.length} mongoose records!`));
 
 module.exports.save = save;
 module.exports.Repo = Repo;

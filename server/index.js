@@ -1,7 +1,9 @@
 const express = require('express');
+const Promise = require('bluebird');
 const db = require('../database/index.js');
 let app = express();
 const bodyParser = require('body-parser');
+const github = require('../helpers/github.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json({strict: false}));
@@ -11,18 +13,13 @@ app.post('/repos', function (req, res) {
   // This route should take the github username provided
   // and get the repo information from the github API, then
   // save the repo information in the database
-    // $.ajax({
-    //   method: 'GET',
-    //   url: `https://api.github.com/users/${term.trim()}/repos`,
-    //   headers: {
-    //     'User-Agent': 'ephraimg'
-    //     'Authorization': 'token GITHUB_TOKEN'
-    //   },
-    //   dataType: 'json',
-    //   success: 
-    // })
-  console.log('New post from client...\nRequest included: ', req.query, req.params, req.body);
-  res.send(201);
+  console.log('New post from client...\nRequest body is: ', req.body);
+  github.getReposByUsername(req.body)
+    .then(repos => {
+      console.log(repos);
+      db.save(repos);
+    })
+    .then(res.send(201));
 });
 
 app.get('/repos', function (req, res) {

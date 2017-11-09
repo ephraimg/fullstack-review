@@ -11,22 +11,28 @@ class App extends React.Component {
     this.state = { 
       repos: []
     }
+  }
 
+  componentDidMount () {
+    $.ajax({
+      type: 'GET',
+      url: '/repos',
+      success: (topRepos) => {
+        this.setState({repos: topRepos});
+      }
+    });
   }
 
   search (term) {
     console.log(`${term} was searched`);
-
-$.ajax({
-  type: "POST",
-  url: '/repos',
-  data: JSON.stringify('hello'),
-  processData: false,
-  success: () => {},
-  contentType: 'application/json'
-});
-    
-    //$.post('localhost:1128/repos', 'hello', () => {});
+    $.ajax({
+      type: "POST",
+      url: '/repos',
+      data: JSON.stringify(term),
+      processData: false,
+      success: () => {},
+      contentType: 'application/json'
+    });
   }
 
   render () {
