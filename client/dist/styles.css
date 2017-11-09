@@ -1,7 +1,35 @@
 body {
   margin: 50px;
+  background-color: #e6fff2;
 }
 
 li {
-  background-color: coral;
+  height: 35px;
+  max-width: 500px;
+  border: 1px dotted black;
+  padding: 5px;
+  margin: 5px 20px 10px 0;
+  background-color: #ccffe6;
+}
+
+input {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.repo-list {
+  list-style-type: none;
+  padding-left: 0px;
+  margin-left: 0px
+}
+
+.avatar {
+  height: 35px;
+  width: 35px;
+  margin-right: 15px;
+  float: left
+}
+
+.repo-info {
+  margin-right: 10px
 }

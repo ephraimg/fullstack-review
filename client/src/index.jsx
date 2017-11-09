@@ -23,7 +23,6 @@ class App extends React.Component {
       type: 'GET',
       url: '/repos',
       success: (results) => {
-        console.log("Got results from server!")
         this.setState((prevState, props) => {
           return {
             repos: results.repos,
